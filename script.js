@@ -2,8 +2,8 @@
 //////////////////// Set up and initiate svg containers ///////////////////
 ///////////////////////////////////////////////////////////////////////////	
 
-var days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-	times = d3.range(24);
+var days = ["Juice&Drug", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+	times = d3.range(4);
 
 var margin = {
 	top: 170,
@@ -12,7 +12,7 @@ var margin = {
 	left: 50
 };
 
-var width = Math.max(Math.min(window.innerWidth, 1000), 500) - margin.left - margin.right - 20,
+var width = Math.max(Math.min(window.innerWidth, 900), 500) - margin.left - margin.right - 520,
 	gridSize = Math.floor(width / times.length),
 	height = gridSize * (days.length+2);
 
@@ -25,8 +25,8 @@ var svg = d3.select('#trafficAccidents')
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 //Reset the overall font size
-var newFontSize = width * 62.5 / 900;
-d3.select("html").style("font-size", newFontSize + "%");
+var newFontSize = 70;
+d3.select("html").style("font-size", "10px");
 
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////////// Draw Heatmap /////////////////////////////////
@@ -74,10 +74,10 @@ var heatMap = svg.selectAll(".hour")
 //Append title to the top
 svg.append("text")
 	.attr("class", "title")
-    .attr("x", width/2)
+    .attr("x", width/3)
     .attr("y", -90)
     .style("text-anchor", "middle")
-    .text("Number of Traffic accidents per Day & Hour combination");
+    .text("Average similarities for pairs of words");
 svg.append("text")
 	.attr("class", "subtitle")
     .attr("x", width/2)
