@@ -1,15 +1,23 @@
 ///////////////////////////////////////////////////////////////////////////
 //////////////////// Set up and initiate svg containers ///////////////////
-///////////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////////
 
-var days = ["Juice&Drug", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-	times = d3.range(4);
+
+
+
+
+var days = ["juice - drug", "television - tires ", "computer - refrigerator", "ball - globe ", "glass - cup ", "car - bicycle", "coffee - tea  "],
+times = ['sim_RM','sim_RM', 'sim_RM', 'sim_RM']
+
+
+
+
 
 var margin = {
 	top: 170,
 	right: 50,
 	bottom: 70,
-	left: 50
+	left: 150
 };
 
 var width = Math.max(Math.min(window.innerWidth, 900), 500) - margin.left - margin.right - 520,
@@ -26,12 +34,12 @@ var svg = d3.select('#trafficAccidents')
 
 //Reset the overall font size
 var newFontSize = 70;
-d3.select("html").style("font-size", "10px");
+d3.select("html").style("font-size", "7px");
 
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////////// Draw Heatmap /////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-	
+
 //Based on the heatmap example of: http://blockbuilder.org/milroc/7014412
 
 var colorScale = d3.scale.linear()
@@ -44,9 +52,9 @@ var dayLabels = svg.selectAll(".dayLabel")
     .enter().append("text")
     .text(function (d) { return d; })
     .attr("x", 0)
-    .attr("y", function (d, i) { return i * gridSize; })
+    .attr("y", function (d, i) { return i * gridSize ; })
     .style("text-anchor", "end")
-    .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
+    .attr("transform", "translate(-6," + gridSize / 1.5 + ")") // mitad
     .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
 
 var timeLabels = svg.selectAll(".timeLabel")
@@ -117,14 +125,14 @@ svg.append("defs")
 	.attr("id", "legend-traffic")
 	.attr("x1", "0%").attr("y1", "0%")
 	.attr("x2", "100%").attr("y2", "0%")
-	.selectAll("stop") 
-	.data(d3.range(numStops))                
-	.enter().append("stop") 
-	.attr("offset", function(d,i) { 
+	.selectAll("stop")
+	.data(d3.range(numStops))
+	.enter().append("stop")
+	.attr("offset", function(d,i) {
 		return countScale( countPoint[i] )/width;
-	})   
-	.attr("stop-color", function(d,i) { 
-		return colorScale( countPoint[i] ); 
+	})
+	.attr("stop-color", function(d,i) {
+		return colorScale( countPoint[i] );
 	});
 
 ///////////////////////////////////////////////////////////////////////////
@@ -146,7 +154,7 @@ legendsvg.append("rect")
 	.attr("width", legendWidth)
 	.attr("height", 10)
 	.style("fill", "url(#legend-traffic)");
-	
+
 //Append title
 legendsvg.append("text")
 	.attr("class", "legendTitle")
@@ -172,4 +180,3 @@ legendsvg.append("g")
 	.attr("class", "axis")
 	.attr("transform", "translate(0," + (10) + ")")
 	.call(xAxis);
-
